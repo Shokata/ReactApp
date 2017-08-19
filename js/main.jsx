@@ -3,6 +3,26 @@ import ReactDOM from 'react-dom';
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    class Fundament extends React.Component {
+        render() {
+            return (
+                <div>
+                    <p>Fundament</p>
+                </div>
+            )
+        }
+    }
+
+    class Dach extends React.Component {
+        render() {
+            return (
+                <div>
+                    <p>Dach</p>
+                </div>
+            )
+        }
+    }
+
     class Child extends React.Component {
         constructor(props) {
             super(props);
@@ -11,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 state: '',
                 startDate: '',
                 endDate: '',
-                value: ''
+                value: 'fundament'
             };
 
             this.handleChange = this.handleChange.bind(this);
@@ -19,12 +39,20 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         handleChange(event) {
-            this.setState({value: event.target.value});
+            this.setState({
+                value: event.target.value
+            });
+            console.log('zmieniono procedurę...')
         }
 
         handleSubmit(event) {
             event.preventDefault();
-            console.log('Pokazuję procedurę');
+            console.log('Wyświetlam procedurę')
+            if (this.state.value === 'fundament') {
+                <Fundament/>
+            } else if (this.state.value === 'dach') {
+                <Dach/>
+            }
         }
 
         render() {
@@ -34,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <label>
                             Wybierz procedurę:
                             <select value={this.state.value} onChange={this.handleChange}>
+                                <option disabled defaultValue>Wybierz poniżej</option>
                                 <option value="fundament">1. Procedura budowy fundamentów</option>
                                 <option value="dach">2. Procedura budowy dachu</option>
                             </select>
@@ -44,9 +73,10 @@ document.addEventListener('DOMContentLoaded', function () {
             );
         }
     }
+
     class ShowHide extends React.Component {
-        constructor() {
-            super();
+        constructor(props) {
+            super(props);
             this.state = {
                 childVisible: false,
                 checked: false
@@ -54,27 +84,26 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         render() {
-            return(
+            return (
                 <div>
                     <div>
                         <button onClick={() => this.onClick()}>{this.state.checked ? 'Ukryj Procedury' : 'Dodaj' +
                             ' Procedury'}</button>
                     </div>
                     {
-                        this.state.childVisible
-                            ? <Child />
-                            : null
+                        this.state.childVisible ? <Child/> : null
                     }
                 </div>
             )
         }
+
         onClick() {
             this.setState({
                 childVisible: !this.state.childVisible,
                 checked: !this.state.checked
             });
         }
-    };
+    }
 
     class App extends React.Component {
         render() {

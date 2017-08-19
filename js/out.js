@@ -9782,37 +9782,99 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 document.addEventListener('DOMContentLoaded', function () {
-    var Child = function (_React$Component) {
-        _inherits(Child, _React$Component);
+    var Fundament = function (_React$Component) {
+        _inherits(Fundament, _React$Component);
+
+        function Fundament() {
+            _classCallCheck(this, Fundament);
+
+            return _possibleConstructorReturn(this, (Fundament.__proto__ || Object.getPrototypeOf(Fundament)).apply(this, arguments));
+        }
+
+        _createClass(Fundament, [{
+            key: 'render',
+            value: function render() {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        'Fundament'
+                    )
+                );
+            }
+        }]);
+
+        return Fundament;
+    }(_react2.default.Component);
+
+    var Dach = function (_React$Component2) {
+        _inherits(Dach, _React$Component2);
+
+        function Dach() {
+            _classCallCheck(this, Dach);
+
+            return _possibleConstructorReturn(this, (Dach.__proto__ || Object.getPrototypeOf(Dach)).apply(this, arguments));
+        }
+
+        _createClass(Dach, [{
+            key: 'render',
+            value: function render() {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        'Dach'
+                    )
+                );
+            }
+        }]);
+
+        return Dach;
+    }(_react2.default.Component);
+
+    var Child = function (_React$Component3) {
+        _inherits(Child, _React$Component3);
 
         function Child(props) {
             _classCallCheck(this, Child);
 
-            var _this = _possibleConstructorReturn(this, (Child.__proto__ || Object.getPrototypeOf(Child)).call(this, props));
+            var _this3 = _possibleConstructorReturn(this, (Child.__proto__ || Object.getPrototypeOf(Child)).call(this, props));
 
-            _this.state = {
+            _this3.state = {
                 name: '',
                 state: '',
                 startDate: '',
                 endDate: '',
-                value: ''
+                value: 'fundament'
             };
 
-            _this.handleChange = _this.handleChange.bind(_this);
-            _this.handleSubmit = _this.handleSubmit.bind(_this);
-            return _this;
+            _this3.handleChange = _this3.handleChange.bind(_this3);
+            _this3.handleSubmit = _this3.handleSubmit.bind(_this3);
+            return _this3;
         }
 
         _createClass(Child, [{
             key: 'handleChange',
             value: function handleChange(event) {
-                this.setState({ value: event.target.value });
+                this.setState({
+                    value: event.target.value
+                });
+                console.log('zmieniono procedurę...');
             }
         }, {
             key: 'handleSubmit',
             value: function handleSubmit(event) {
                 event.preventDefault();
-                console.log('Pokazuję procedurę');
+                console.log('Wyświetlam procedurę');
+                if (this.state.value === 'fundament') {
+                    _react2.default.createElement(Fundament, null);
+                } else if (this.state.value === 'dach') {
+                    _react2.default.createElement(Dach, null);
+                }
             }
         }, {
             key: 'render',
@@ -9830,6 +9892,11 @@ document.addEventListener('DOMContentLoaded', function () {
                             _react2.default.createElement(
                                 'select',
                                 { value: this.state.value, onChange: this.handleChange },
+                                _react2.default.createElement(
+                                    'option',
+                                    { disabled: true, defaultValue: true },
+                                    'Wybierz poni\u017Cej'
+                                ),
                                 _react2.default.createElement(
                                     'option',
                                     { value: 'fundament' },
@@ -9851,25 +9918,25 @@ document.addEventListener('DOMContentLoaded', function () {
         return Child;
     }(_react2.default.Component);
 
-    var ShowHide = function (_React$Component2) {
-        _inherits(ShowHide, _React$Component2);
+    var ShowHide = function (_React$Component4) {
+        _inherits(ShowHide, _React$Component4);
 
-        function ShowHide() {
+        function ShowHide(props) {
             _classCallCheck(this, ShowHide);
 
-            var _this2 = _possibleConstructorReturn(this, (ShowHide.__proto__ || Object.getPrototypeOf(ShowHide)).call(this));
+            var _this4 = _possibleConstructorReturn(this, (ShowHide.__proto__ || Object.getPrototypeOf(ShowHide)).call(this, props));
 
-            _this2.state = {
+            _this4.state = {
                 childVisible: false,
                 checked: false
             };
-            return _this2;
+            return _this4;
         }
 
         _createClass(ShowHide, [{
             key: 'render',
             value: function render() {
-                var _this3 = this;
+                var _this5 = this;
 
                 return _react2.default.createElement(
                     'div',
@@ -9880,7 +9947,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         _react2.default.createElement(
                             'button',
                             { onClick: function onClick() {
-                                    return _this3.onClick();
+                                    return _this5.onClick();
                                 } },
                             this.state.checked ? 'Ukryj Procedury' : 'Dodaj' + ' Procedury'
                         )
@@ -9901,10 +9968,8 @@ document.addEventListener('DOMContentLoaded', function () {
         return ShowHide;
     }(_react2.default.Component);
 
-    ;
-
-    var App = function (_React$Component3) {
-        _inherits(App, _React$Component3);
+    var App = function (_React$Component5) {
+        _inherits(App, _React$Component5);
 
         function App() {
             _classCallCheck(this, App);
