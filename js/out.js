@@ -9763,6 +9763,8 @@ module.exports = __webpack_require__(18);
 "use strict";
 
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(82);
 
 var _react2 = _interopRequireDefault(_react);
@@ -9773,12 +9775,158 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 document.addEventListener('DOMContentLoaded', function () {
-    _reactDom2.default.render(_react2.default.createElement(
-        'h1',
-        null,
-        'Hello, World!'
-    ), document.getElementById('app'));
+    var Child = function (_React$Component) {
+        _inherits(Child, _React$Component);
+
+        function Child(props) {
+            _classCallCheck(this, Child);
+
+            var _this = _possibleConstructorReturn(this, (Child.__proto__ || Object.getPrototypeOf(Child)).call(this, props));
+
+            _this.state = {
+                name: '',
+                state: '',
+                startDate: '',
+                endDate: '',
+                value: ''
+            };
+
+            _this.handleChange = _this.handleChange.bind(_this);
+            _this.handleSubmit = _this.handleSubmit.bind(_this);
+            return _this;
+        }
+
+        _createClass(Child, [{
+            key: 'handleChange',
+            value: function handleChange(event) {
+                this.setState({ value: event.target.value });
+            }
+        }, {
+            key: 'handleSubmit',
+            value: function handleSubmit(event) {
+                event.preventDefault();
+                console.log('Pokazuję procedurę');
+            }
+        }, {
+            key: 'render',
+            value: function render() {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'form',
+                        { onSubmit: this.handleSubmit },
+                        _react2.default.createElement(
+                            'label',
+                            null,
+                            'Wybierz procedur\u0119:',
+                            _react2.default.createElement(
+                                'select',
+                                { value: this.state.value, onChange: this.handleChange },
+                                _react2.default.createElement(
+                                    'option',
+                                    { value: 'fundament' },
+                                    '1. Procedura budowy fundament\xF3w'
+                                ),
+                                _react2.default.createElement(
+                                    'option',
+                                    { value: 'dach' },
+                                    '2. Procedura budowy dachu'
+                                )
+                            )
+                        ),
+                        _react2.default.createElement('input', { type: 'submit', value: 'Wy\u015Bwietl' })
+                    )
+                );
+            }
+        }]);
+
+        return Child;
+    }(_react2.default.Component);
+
+    var ShowHide = function (_React$Component2) {
+        _inherits(ShowHide, _React$Component2);
+
+        function ShowHide() {
+            _classCallCheck(this, ShowHide);
+
+            var _this2 = _possibleConstructorReturn(this, (ShowHide.__proto__ || Object.getPrototypeOf(ShowHide)).call(this));
+
+            _this2.state = {
+                childVisible: false,
+                checked: false
+            };
+            return _this2;
+        }
+
+        _createClass(ShowHide, [{
+            key: 'render',
+            value: function render() {
+                var _this3 = this;
+
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(
+                            'button',
+                            { onClick: function onClick() {
+                                    return _this3.onClick();
+                                } },
+                            this.state.checked ? 'Ukryj Procedury' : 'Dodaj' + ' Procedury'
+                        )
+                    ),
+                    this.state.childVisible ? _react2.default.createElement(Child, null) : null
+                );
+            }
+        }, {
+            key: 'onClick',
+            value: function onClick() {
+                this.setState({
+                    childVisible: !this.state.childVisible,
+                    checked: !this.state.checked
+                });
+            }
+        }]);
+
+        return ShowHide;
+    }(_react2.default.Component);
+
+    ;
+
+    var App = function (_React$Component3) {
+        _inherits(App, _React$Component3);
+
+        function App() {
+            _classCallCheck(this, App);
+
+            return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        }
+
+        _createClass(App, [{
+            key: 'render',
+            value: function render() {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(ShowHide, null)
+                );
+            }
+        }]);
+
+        return App;
+    }(_react2.default.Component);
+
+    _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
 });
 
 /***/ }),
